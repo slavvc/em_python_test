@@ -18,7 +18,7 @@ class Workload:
             ip=self.data.ip
         )
         self.data = wl
-        return self.store.change_workload(id_, self.data)
+        return self.store.change_workload(self.id, self.data)
 
     @property
     def representation(self) -> ModelWorkload:

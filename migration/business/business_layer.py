@@ -48,12 +48,7 @@ class BusinessLayer:
     def update_workload(self, id_: int, obj: ChangeWorkload) -> bool:
         wl = self.read_workload(id_)
         if wl:
-            if obj.ip in self.workload_ips and obj.ip != wl.data.ip:
-                raise ValueError('this ip is already used')
             result = wl.set(obj)
-            if result:
-                self.workload_ips.remove(wl.data.ip)
-                self.workload_ips.add(obj.ip)
             return result
         return False
 

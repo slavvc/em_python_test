@@ -1,7 +1,7 @@
 import unittest
 
 from migration.persistence.in_memory_store import InMemoryStore
-from migration.business.business import BusinessLayer
+from migration.business.business_layer import BusinessLayer
 from migration.business.representation_models import *
 
 

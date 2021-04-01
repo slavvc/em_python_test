@@ -1,5 +1,6 @@
 import threading
 import time
+from typing import Optional
 
 from .representation_models import (
     MigrationTarget as ModelMigrationTarget,
@@ -15,7 +16,7 @@ class Migration:
         self.store = store
         self.data = data
         self.id = id_
-        self.error_reason = None
+        self.error_reason: Optional[str] = None
 
     def set(self, other: ChangeMigration) -> bool:
         if self.state == 'running':
