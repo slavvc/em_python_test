@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Literal, List
+from typing import Literal, List, Optional
 
 
 class Credentials(BaseModel):
@@ -22,19 +22,28 @@ class Workload(BaseModel):
 class MigrationTarget(BaseModel):
     cloud_type: Literal['aws', 'azure', 'vsphere', 'vcloud']
     cloud_credentials: Credentials
-    target_vm: Workload
+    target_vm: Optional[Workload]
 
 
 class Migration(BaseModel):
     selected_mount_points: List[MountPoint]
-    source: Workload
+    source: Optional[Workload]
     migration_target: MigrationTarget
     migration_state: Literal['not_started', 'running', 'error', 'success'] = 'not_started'
 
 
-# class Store(BaseModel):
-#     credentials: list[Credentials]
-#     mount_points: list[MountPoint]
-#     workloads: list[Workload]
-#     migration_targets: list[MigrationTarget]
-#     migrations: list[Migration]
+class ChangeMigrationTarget(BaseModel):
+    cloud_type: Literal['aws', 'azure', 'vsphere', 'vcloud']
+    cloud_credentials: Credentials
+    target_vm: int
+
+
+class ChangeMigration(BaseModel):
+    selected_mount_points: List[MountPoint]
+    source: int
+    migration_target: ChangeMigrationTarget
+
+
+class ChangeWorkload(BaseModel):
+    credentials: Credentials
+    storage: List[MountPoint]
