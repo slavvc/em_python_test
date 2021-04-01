@@ -17,8 +17,8 @@ class JSONStore(InMemoryStore):
         self.file = file
         self.load()
 
-    def __del__(self):
-        self.file.close()
+    # def __del__(self):
+    #     self.file.close()
 
     def dump(self):
         data = _Data(
